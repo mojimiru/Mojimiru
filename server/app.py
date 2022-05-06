@@ -8,10 +8,7 @@ from flask import Flask, request, abort, send_file
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(
-    app,
-    supports_credentials=True
-)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 fontmap = json.loads(Path('./assets/fontmap.json').read_text(encoding="utf-8"))
 
