@@ -6,7 +6,7 @@ from fontTools.subset import Options,load_font,Subsetter,save_font
 from pathlib import Path
 from flask import Flask, request, abort, Response
 from flask_cors import CORS
-from werkzeug import FileWrapper
+from werkzeug.wsgi import FileWrapper
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
