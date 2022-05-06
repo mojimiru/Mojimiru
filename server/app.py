@@ -4,8 +4,9 @@ from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
 from fontTools.subset import Options,load_font,Subsetter,save_font
 from pathlib import Path
-from flask import Flask, request, abort, send_file
+from flask import Flask, request, abort, Response
 from flask_cors import CORS
+from werkzeug import FileWrapper
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -38,7 +39,9 @@ def getfont():
           fontpath = Path(fontmap[fontname])
           subset = getGlyphSvg(fontpath,texts)
           subset.seek(0)
-          return send_file(subset,download_name='font.woff',mimetype='application/font-woff')
+          wrapper = FileWrapper(subset)
+          return Response(wrapper, mimetype="text/plain", direct_passthrough=True)
+          # send_file(subset,download_name='font.woff',mimetype='application/font-woff')
           # return "aaaaaa"
         return abort(400)
       else:
