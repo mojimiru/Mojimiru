@@ -1,7 +1,5 @@
 from io import BytesIO
 import json
-from fontTools.pens.svgPathPen import SVGPathPen
-from fontTools.ttLib import TTFont
 from fontTools.subset import Options,load_font,Subsetter,save_font
 from pathlib import Path
 from flask import Flask, request, abort, Response
